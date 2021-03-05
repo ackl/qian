@@ -1,0 +1,59 @@
+.earnings-card {
+    .MuiButton-root.Mui-disabled {
+        color: white;
+        text-decoration: underline;
+    }
+}
+
+.react-stockcharts-axis text {
+    color: #efefef;
+}
+
+.react-stockcharts-tooltip {
+    fill: #efefef;
+}
+.react-stockcharts-tooltip-label {
+    fill: #efefef;
+}
+
+.fullheight {
+    height: 100%;
+}
+
+.keystats {
+    .MuiTableCell-root.MuiTableCell-body {
+        position: relative;
+        padding-top: 1.5rem;
+        width: 50%;
+        border: none;
+        
+        span {
+            position: absolute;
+            top: 5px;
+            font-size: 0.6rem;
+            color: #999;
+            
+            a {
+                text-decoration: none;
+                color: #999;
+            }
+        }
+    }
+}
+
+.header-link {
+    color: green;
+    float: right;
+    margin-left: 1rem;
+}
+
+.dashboard-main {
+    margin-top: 3rem;
+}
+
+
+.search-form {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 3rem;
+}
