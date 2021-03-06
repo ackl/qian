@@ -1,6 +1,6 @@
 import React from 'react'
 import useSWR from 'swr'
-import Price from './Price'
+import Price from './price'
 import Spinner from '../spinner'
 import Profile from './profile'
 import EarningsChart from './earningsChart'
