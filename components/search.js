@@ -9,10 +9,9 @@ export default function Search() {
             autoComplete="off"
             className="search-form"
             onSubmit={(e) => {
-                const ticker = e.target.querySelector('input').value;
-                router.push({
-                    pathname: '/stonk/[symbol]',
-                    query: { symbol: ticker },
+                const symbol = e.target.querySelector('input').value;
+                router.push(`/stonk/[symbol]`, `/stonk/${symbol}`, {
+                    shallow: true,
                 })
             }}
         >
