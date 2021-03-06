@@ -1,7 +1,8 @@
 import React from 'react';
 import { ChartCanvas } from "react-stockcharts";
 
-export class MyChartCanvas extends ChartCanvas {
+// extend react-stockchart ChartCanvas to fix scroll bug
+export class ChartCanvas extends ChartCanvas {
     constructor() {
         super()
     }
@@ -9,12 +10,10 @@ export class MyChartCanvas extends ChartCanvas {
     handleMouseEnter(e) {
         super.handleMouseEnter(e)
         document.body.style.overflow = "hidden"
-        console.log('mouse entered');
     }
 
     handleMouseLeave(e) {
         super.handleMouseLeave(e)
         document.body.style.overflow = "auto"
-        console.log('mouse left');
     }
 }
