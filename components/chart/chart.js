@@ -5,7 +5,7 @@ import { format } from "d3-format";
 import { timeFormat } from "d3-time-format";
 
 import { Chart } from "react-stockcharts";
-import { ChartCanvas } from "./chartcanvas";
+import { ChartCanvasEx } from "./chartcanvas";
 import {
 	BarSeries,
 	CandlestickSeries,
@@ -54,7 +54,7 @@ class CandleStickChart extends React.Component {
 		const xExtents = [start, end];
 
 		return (
-			<ChartCanvas height={height}
+			<ChartCanvasEx height={height}
                     clamp={true}
 					ratio={ratio}
 					width={width}
@@ -100,7 +100,7 @@ class CandleStickChart extends React.Component {
 				</Chart>
 				<CrossHairCursor strokeDasharray="LongDashDot" />
 
-			</ChartCanvas>
+			</ChartCanvasEx>
 		);
 	}
 }

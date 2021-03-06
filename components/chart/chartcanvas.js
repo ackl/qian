@@ -2,7 +2,7 @@ import React from 'react';
 import { ChartCanvas } from "react-stockcharts";
 
 // extend react-stockchart ChartCanvas to fix scroll bug
-export class ChartCanvas extends ChartCanvas {
+export class ChartCanvasEx extends ChartCanvas {
     constructor() {
         super()
     }
