@@ -11,9 +11,15 @@ import Grid from '@material-ui/core/Grid';
 const fetcher = url => fetch(url).then(r => r.json())
 
 export default function StonkContainer(props) {
-    const { data: fundemental } = useSWR(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${props.symbol}`, fetcher)
+    const {
+        data: fundemental,
+        error: error_f
+    } = useSWR(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${props.symbol}`, fetcher)
 
-    const { data: OHLC } = useSWR(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${props.symbol}/history`, url => fetch(url)
+    const {
+        data: OHLC,
+        error: error_ohlc
+    } = useSWR(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${props.symbol}/history`, url => fetch(url)
         .then(r => r.json())
         .then(data => {
             return data.map(x => {
@@ -23,7 +29,14 @@ export default function StonkContainer(props) {
         })
     )
 
-    const { data: quote } = useSWR(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${props.symbol}/quote`, fetcher, { refreshInterval: 3000 })
+    const {
+        data: quote,
+        error: error_quote
+    } = useSWR(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${props.symbol}/quote`, fetcher, { refreshInterval: 3000 })
+
+    if (error_f || error_ohlc || error_quote) {
+        return <h1>Something went wrong...</h1>
+    }
 
     if (!fundemental || !OHLC || !quote) {
         return <Spinner />
