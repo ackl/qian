@@ -20,7 +20,7 @@ export default class StonkContainer extends React.Component {
     componentDidMount () {
         if (!this.props.symbol) return
 
-        fetch(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/${this.props.symbol}`)
+        fetch(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${this.props.symbol}`)
             .then((response) => response.json())
             .then(data => {
                 this.setState(prevState => ({
