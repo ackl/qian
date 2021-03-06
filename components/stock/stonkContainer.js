@@ -7,6 +7,7 @@ import EarningsChart from './earningsChart'
 import KeyStats from './keystats'
 import ChartComponent from '../chart/chartwrapper'
 import Grid from '@material-ui/core/Grid';
+import Link from 'next/link'
 
 const fetcher = url => fetch(url).then(r => r.json())
 
@@ -34,12 +35,13 @@ export default function StonkContainer(props) {
         error: error_quote
     } = useSWR(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${props.symbol}/quote`, fetcher, { refreshInterval: 3000 })
 
+
     if (error_f || error_ohlc || error_quote) {
         return <h1>Something went wrong...</h1>
     }
 
     if (!fundemental || !OHLC || !quote) {
-        return <Spinner />
+        return <Spinner fullpage={true} />
     }
 
     if (fundemental.message) {
@@ -50,6 +52,7 @@ export default function StonkContainer(props) {
         <Grid container spacing={3}>
             <Grid item xs={12}>
                 <h1>{ fundemental.price.symbol } [{ fundemental.price.exchangeName }]</h1>
+                <Link href="/">back</Link>
                 <a className="header-link" href={`https://finance.yahoo.com/quote/AAPL/${fundemental.price.symbol}`} target="_blank">Yahoo Finance</a>
                 <a className="header-link" href={`https://www.marketwatch.com/investing/stock/${fundemental.price.symbol}`} target="_blank">MarketWatch</a>
             </Grid>

@@ -1,7 +1,7 @@
 export default function Spinner(props)  {
     return (
         <>
-        <div className="lds-ripple"><div></div><div></div></div>
+        <div className={`lds-ripple ${props.fullpage ? "fullpage" : ""}`}><div></div><div></div></div>
         <style jsx>{`
             .lds-ripple {
                 display: block;
@@ -9,6 +9,11 @@ export default function Spinner(props)  {
                 width: 80px;
                 height: 80px;
                 margin: 0 auto;
+            }
+            .fullpage {
+                position: absolute;
+                top: 50%;
+                left: 50%;
             }
             .lds-ripple div {
                 position: absolute;

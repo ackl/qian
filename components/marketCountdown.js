@@ -25,7 +25,7 @@ export default class MarketCountdown extends React.Component {
                     <CardContent className={UK_MARKET_COUNTDOWN_DATA.marketEvent == 'open' ? styles.close : styles.open}>
                         <h1>LSE</h1>
                         <h1> <Countdown daysInHours date={new Date(UK_MARKET_COUNTDOWN_DATA.date.format())} /> </h1>
-                        <h1>until {UK_MARKET_COUNTDOWN_DATA.marketEvent}</h1>
+                        <h2>until {UK_MARKET_COUNTDOWN_DATA.marketEvent}</h2>
                     </CardContent>
                 </Card>
             </Grid>
@@ -35,7 +35,7 @@ export default class MarketCountdown extends React.Component {
                     <CardContent className={US_MARKET_COUNTDOWN_DATA.marketEvent == 'open' ? styles.close : styles.open}>
                         <h1>NYSE</h1>
                         <h1> <Countdown daysInHours date={new Date(US_MARKET_COUNTDOWN_DATA.date.format())} /> </h1>
-                        <h1>until {US_MARKET_COUNTDOWN_DATA.marketEvent}</h1>
+                        <h2>until {US_MARKET_COUNTDOWN_DATA.marketEvent}</h2>
                     </CardContent>
                 </Card>
             </Grid>
@@ -45,7 +45,7 @@ export default class MarketCountdown extends React.Component {
                     <CardContent className={HK_MARKET_COUNTDOWN_DATA.marketEvent == 'open' ? styles.close : styles.open}>
                         <h1>HKEX</h1>
                         <h1> <Countdown daysInHours date={new Date(HK_MARKET_COUNTDOWN_DATA.date.format())} /> </h1>
-                        <h1>until {HK_MARKET_COUNTDOWN_DATA.marketEvent}</h1>
+                        <h2>until {HK_MARKET_COUNTDOWN_DATA.marketEvent}</h2>
                     </CardContent>
                 </Card>
             </Grid>

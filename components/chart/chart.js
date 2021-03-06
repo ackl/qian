@@ -69,8 +69,8 @@ class CandleStickChart extends React.Component {
 
                 {this.props.volume &&
 				<Chart id={2} origin={(w, h) => [0, h - 150]} height={150} yExtents={d => d.volume}>
-					<XAxis axisAt="bottom" orient="bottom" stroke={axisColour} tickStroke={axisColour}/>
-					<YAxis axisAt="left" orient="left" ticks={5} stroke={axisColour} tickStroke={axisColour} tickFormat={format(".2s")}/>
+					<XAxis axisAt="bottom" orient="bottom" stroke={axisColour} tickStroke={axisColour} fontFamily="monospace" />
+					<YAxis axisAt="left" orient="left" ticks={5} stroke={axisColour} tickStroke={axisColour} tickFormat={format(".2s")} fontFamily="monospace" />
 					<BarSeries yAccessor={d => d.volume} fill="rgba(164, 197, 238, 0.37)" />
 				</Chart>
                 }
@@ -78,7 +78,7 @@ class CandleStickChart extends React.Component {
 				<Chart id={1}
 						yExtents={[d => [d.high, d.low]]}
 						padding={{ top: 10, bottom: 20 }}>
-					<XAxis axisAt="bottom" orient="bottom" stroke={axisColour} tickStroke={axisColour}/>
+					<XAxis axisAt="bottom" orient="bottom" stroke={axisColour} tickStroke={axisColour} fontFamily="monospace" />
 					<MouseCoordinateX
 						at="bottom"
 						orient="bottom"
@@ -88,7 +88,7 @@ class CandleStickChart extends React.Component {
 						orient="right"
 						displayFormat={format(".2f")} />
 
-					<YAxis axisAt="right" orient="right" ticks={5} stroke={axisColour} tickStroke={axisColour} />
+					<YAxis axisAt="right" orient="right" ticks={5} stroke={axisColour} tickStroke={axisColour} fontFamily="monospace" />
 
 					<CandlestickSeries
                         fill = {d => d.close > d.open ? "#6B8" : "#d26"}

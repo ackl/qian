@@ -7,13 +7,20 @@
 
 .react-stockcharts-axis text {
     color: #efefef;
+    font-family: 'Courier', 'Monaco', 'monospace';
 }
 
 .react-stockcharts-tooltip {
     fill: #efefef;
+    font-family: 'Courier', 'Monaco', 'monospace';
 }
 .react-stockcharts-tooltip-label {
     fill: #efefef;
+    font-family: 'Courier', 'Monaco', 'monospace';
+}
+
+.MuiContainer-root {
+    min-height: 100vh;
 }
 
 .fullheight {
@@ -23,6 +30,7 @@
 .keystats {
     .MuiTableCell-root.MuiTableCell-body {
         position: relative;
+        padding: 0.5rem;
         padding-top: 1.5rem;
         width: 50%;
         border: none;
@@ -41,14 +49,18 @@
     }
 }
 
+a {
+    color: #6b8;
+}
+
 .header-link {
-    color: green;
     float: right;
     margin-left: 1rem;
 }
 
 .dashboard-main {
     margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 
 
@@ -56,4 +68,8 @@
     width: 100%;
     text-align: center;
     margin-bottom: 3rem;
+
+    .MuiFormControl-root.MuiTextField-root {
+        min-width: 17rem;
+    }
 }

@@ -50,7 +50,9 @@ class EarningsChart extends React.Component {
                     orientation: 'h'
                 },
                 font: {
-                    color: 'white'
+                    color: '#efefef',
+                    family: 'Courier, Monaco, monospace'
+
                 },
                 dragmode: false
             }

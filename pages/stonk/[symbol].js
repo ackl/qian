@@ -26,7 +26,6 @@ export default function Stonk() {
             <Box>
                 <Container>
                     <StonkContainer symbol={query.symbol}></StonkContainer>
-                    <Link href="/">back to home</Link>
                 </Container>
             </Box>
         </>
