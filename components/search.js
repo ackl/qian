@@ -9,10 +9,9 @@ export default function Search() {
             autoComplete="off"
             className="search-form"
             onSubmit={(e) => {
+                e.preventDefault();
                 const symbol = e.target.querySelector('input').value;
-                router.push(`/stonk/[symbol]`, `/stonk/${symbol}`, {
-                    shallow: true,
-                })
+                router.push('/stonk/[symbol]', `/stonk/${symbol}`, { shallow: true, })
             }}
         >
             <TextField label="Search by security ticker" />
