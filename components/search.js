@@ -10,7 +10,7 @@ export default function Search() {
             className="search-form"
             onSubmit={(e) => {
                 const ticker = e.target.querySelector('input').value;
-                router.push(`/stonk/${ticker}`)
+                router.push(`/stonk/${ticker}`, null, { shallow: true })
             }}
         >
             <TextField label="Search by security ticker" />
