@@ -20,7 +20,7 @@ export default class StonkContainer extends React.Component {
     componentDidMount () {
         if (!this.props.symbol) return
 
-        fetch(`http://localhost:5000/stock/${this.props.symbol}`)
+        fetch(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/${this.props.symbol}`)
             .then((response) => response.json())
             .then(data => {
                 this.setState(prevState => ({
@@ -29,7 +29,7 @@ export default class StonkContainer extends React.Component {
                 }))
             });
 
-        fetch(`http://localhost:5000/stock/${this.props.symbol}/history`)
+        fetch(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${this.props.symbol}/history`)
             .then(x => x.json())
             .then(data => {
                 data = data.map(x => {
@@ -52,7 +52,7 @@ export default class StonkContainer extends React.Component {
     }
 
     updatePrice() {
-        fetch(`http://localhost:5000/stock/${this.props.symbol}/quote`)
+        fetch(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${this.props.symbol}/quote`)
         .then((response) => response.json())
         .then(data => {
             this.setState(prevState => ({

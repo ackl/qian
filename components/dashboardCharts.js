@@ -7,7 +7,7 @@ const fetcher = url => fetch(url).then(r => r.json())
 
 export default function DashboardCharts(props) {
 
-    let url = `http://localhost:5000/stock/${props.ticker}/history/1y`
+    let url = `${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${props.ticker}/history/1y`
 
     if (props.ticker == 'BTC') {
         url = 'https://api.coingecko.com/api/v3/coins/bitcoin/ohlc?vs_currency=gbp&days=365'
