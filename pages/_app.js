@@ -12,19 +12,9 @@ const theme = createMuiTheme({
     },
     typography: {
         fontFamily: [
-            'Courier',
+            'Anonymous Pro',
             'Monaco',
             'monospace'
-            //'-apple-system',
-            //'BlinkMacSystemFont',
-            //'"Segoe UI"',
-            //'Roboto',
-            //'"Helvetica Neue"',
-            //'Arial',
-            //'sans-serif',
-            //'"Apple Color Emoji"',
-            //'"Segoe UI Emoji"',
-            //'"Segoe UI Symbol"',
         ].join(','),
     }
 });
