@@ -33,11 +33,15 @@ export default function Price(props)  {
                 <h2>
                     { currency }{ props.price.regularMarketPrice } {' '}
                 </h2>
+
+        {props.price.regularMarketChange &&
                 <span className={props.price.regularMarketChange > 0 ? styles.up : styles.down}>
                 { props.price.regularMarketChange.toFixed(3) } {' '}
 
                 ({ props.price.regularMarketChangePercent.toFixed(3) }%)
                 </span>
+        }
+
                 <Table>
                     <TableBody>
                         <TableRow>

@@ -2,11 +2,11 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import styles from './marketCountdown.module.scss';
-
 import moment from 'moment-timezone'
 import dynamic from 'next/dynamic'
-import { getCountdownData } from './utils'
+
+import { getCountdownData } from '../utils'
+import styles from './marketCountdown.module.scss';
 
 const Countdown = dynamic(() => import('react-countdown'), {
     ssr: false
@@ -21,9 +21,9 @@ const MarketCountdownData = {
 export default class MarketCountdown extends React.Component {
     render () {
 
-        const MarketCountdownCards = Object.keys(MarketCountdownData).map(k => {
+        const MarketCountdownCards = Object.keys(MarketCountdownData).map((k, i) => {
             return (
-                <Grid item xs={12} md={2}>
+                <Grid item xs={12} md={2} key={i}>
                     <Card>
                         <CardContent className={MarketCountdownData[k].countdownToEvent == 'open' ? styles.close : styles.open}>
                             <h1>{k}</h1>

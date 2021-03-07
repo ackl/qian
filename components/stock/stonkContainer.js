@@ -6,36 +6,25 @@ import Spinner from '../spinner'
 import Profile from './profile'
 import EarningsChart from './earningsChart'
 import KeyStats from './keystats'
-import ChartComponent from '../chart/chartwrapper'
 import Grid from '@material-ui/core/Grid';
 import Link from 'next/link'
-import StockChart from './stockChart'
-
-const fetcher = url => fetch(url).then(r => r.json())
+import { fetcherBuilder } from '../utils'
+import ChartComponent from '../chart/chartwrapper'
 
 const buildUrl = (ticker, timeframe) => {
     return `${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${ticker}/history/${timeframe}`
 }
 
 export default function StonkContainer(props) {
-
-    const [url, setUrl] = useState(buildUrl(props.symbol, 365));
-
     const {
         data: fundemental,
         error: error_f
-    } = useSWR(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${props.symbol}`, fetcher)
+    } = useSWR(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${props.symbol}`, fetcherBuilder(null))
 
     const {
         data: quote,
         error: error_quote
-    } = useSWR(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${props.symbol}/quote`, fetcher, )
-
-    const handleChangeTimeframe = useCallback((timeframe) => {
-            setUrl(buildUrl(props.symbol, timeframe))
-        }, [url],
-    );
-
+    } = useSWR(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${props.symbol}/quote`, fetcherBuilder(null), )
 
     if (error_f || error_quote) {
         return <h1>Something went wrong...</h1>
@@ -63,18 +52,35 @@ export default function StonkContainer(props) {
             </Grid>
 
             <Grid item xs={12} md={6}>
-                <Profile price={fundemental.price} assetProfile={fundemental.assetProfile} esg={fundemental.esgScores} />
-            </Grid>
-            {fundemental.earnings &&
-            <Grid item xs={12} md={3}>
-                <EarningsChart earnings={fundemental.earnings} />
-            </Grid>
-            }
 
-            <StockChart ticker={props.symbol} volume={true} />
+                {fundemental.assetProfile
+                ?  <Profile price={fundemental.price} assetProfile={fundemental.assetProfile} />
+                :  <h3>Asset profile not available</h3>
+                }
+
+            </Grid>
 
             <Grid item xs={12} md={3}>
-                <KeyStats stats={fundemental.defaultKeyStatistics} summaryDetail={fundemental.summaryDetail} />
+                {fundemental.earnings
+                ? <EarningsChart earnings={fundemental.earnings} />
+                : <h3>Asset earnings not available</h3>
+                }
+            </Grid>
+
+            <Grid item xs={12} md={9}>
+                <ChartComponent
+                    volume={true}
+                    ticker={props.symbol}
+                    buildUrl = {buildUrl}
+                    fetcher={fetcherBuilder()}
+                />
+            </Grid>
+
+            <Grid item xs={12} md={3}>
+                {(fundemental.defaultKeyStatistics && fundemental.summaryDetail)
+                ? <KeyStats stats={fundemental.defaultKeyStatistics} summaryDetail={fundemental.summaryDetail} />
+                : <h3>Key stats not available</h3>
+                }
             </Grid>
         </Grid>
     )

@@ -130,3 +130,18 @@ export function getCountdownData(market_tz, open, close) {
     }
 }
 
+
+function defaultFetcherCallback(data) {
+    return data.map(x => {
+        x.date = new Date(x.date)
+        return x
+    })
+}
+
+export function fetcherBuilder(cb = defaultFetcherCallback) {
+    return url => fetch(url).then(x => x.json()).then(data => {
+        if (!cb) return data
+        return cb(data)
+    })
+
+}

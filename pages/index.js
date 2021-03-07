@@ -1,10 +1,11 @@
 import Head from 'next/head'
-import MarketCountdown from '../components/marketCountdown'
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
-import DashboardCharts from '../components/dashboardCharts'
-import Search from '../components/search'
 import Grid from '@material-ui/core/Grid';
+
+import MarketCountdown from '../components/dashboard/marketCountdown'
+import DashboardChart from '../components/dashboard/dashboardChart'
+import Search from '../components/dashboard/search'
 
 export default function Main() {
     return (
@@ -21,19 +22,19 @@ export default function Main() {
 
                             <MarketCountdown />
 
-                            <DashboardCharts ticker="BTC" volume={false} title="BTC" />
+                            <DashboardChart ticker="BTC" volume={false} title="BTC" />
 
-                            <DashboardCharts ticker="^GSPC" volume={true} title="SPY" />
+                            <DashboardChart ticker="^GSPC" volume={true} title="SPY" />
 
-                            <DashboardCharts ticker="000001.SS" volume={true} title="SHANGHAI"  />
+                            <DashboardChart ticker="000001.SS" volume={true} title="SHANGHAI"  />
 
-                            <DashboardCharts ticker="^HSI" volume={true} title="HONG KONG" />
+                            <DashboardChart ticker="^HSI" volume={true} title="HONG KONG" />
 
-                            <DashboardCharts ticker="^FTSE" volume={true} title="FTSE" />
+                            <DashboardChart ticker="^FTSE" volume={true} title="FTSE" />
 
-                            <DashboardCharts ticker="GLD" volume={true} title="GOLD" />
+                            <DashboardChart ticker="GLD" volume={true} title="GOLD" />
 
-                            <DashboardCharts ticker="OIL" volume={true} title="OIL" />
+                            <DashboardChart ticker="OIL" volume={true} title="OIL" />
                         </Grid>
                     </main>
                 </Container>
