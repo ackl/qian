@@ -13,7 +13,6 @@ const Plot = dynamic(import('react-plotly.js'), {
 class EarningsChart extends React.Component {
     constructor() {
         super()
-        console.log('earnings chart', this.props)
         this.state = {
             data: [],
             layout: {},

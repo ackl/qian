@@ -52,11 +52,34 @@ def history(symbol):
 
     return jsonify(data)
 
+period_map = {
+    '1': '1d',
+    '7': '7d',
+    '30': '1mo',
+    '90': '3mo',
+    '180': '6mo',
+    '365': '1y',
+    'max': 'max'
+}
+
 @app.route("/stock/<symbol>/history/<period>")
 def history_with_period(symbol, period):
     ticker = Ticker(symbol)
 
-    df = ticker.history(period)
+    interval = '1d'
+
+    _period = 'ytd'
+
+    if (period in period_map):
+        _period = period_map[period]
+
+    if _period == '1d':
+        interval = '5m'
+    elif _period == '7d':
+        interval = '1h'
+
+    df = ticker.history(_period, interval)
+
     data = df.to_dict('records')
     dates = [i[1] for i in df.index]
 

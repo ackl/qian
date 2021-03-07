@@ -6,12 +6,15 @@ import { timeFormat } from "d3-time-format";
 
 import { Chart } from "react-stockcharts";
 import { ChartCanvasEx } from "./chartcanvas";
+
 import {
 	BarSeries,
 	CandlestickSeries,
 	LineSeries,
 } from "react-stockcharts/lib/series";
+
 import { XAxis, YAxis } from "react-stockcharts/lib/axes";
+
 import {
 	CrossHairCursor,
 	EdgeIndicator,
@@ -29,7 +32,8 @@ import { last } from "react-stockcharts/lib/utils";
 
 class CandleStickChart extends React.Component {
 	render() {
-        const axisColour = "#efefef"
+        const axisColour = '#efefef'
+        const fontFamily = 'Monaco, Lucida Console, monospace'
 
 		const margin = { left: 80, right: 80, top: 30, bottom: 50 };
 		const height = 400;
@@ -60,17 +64,17 @@ class CandleStickChart extends React.Component {
 					width={width}
 					margin={margin}
 					type={type}
-					seriesName="MSFT"
 					data={data}
 					xScale={xScale}
 					xAccessor={xAccessor}
 					displayXAccessor={displayXAccessor}
+                    seriesName=""
 					xExtents={xExtents}>
 
                 {this.props.volume &&
 				<Chart id={2} origin={(w, h) => [0, h - 150]} height={150} yExtents={d => d.volume}>
-					<XAxis axisAt="bottom" orient="bottom" stroke={axisColour} tickStroke={axisColour} fontFamily="monospace" />
-					<YAxis axisAt="left" orient="left" ticks={5} stroke={axisColour} tickStroke={axisColour} tickFormat={format(".2s")} fontFamily="monospace" />
+					<XAxis axisAt="bottom" orient="bottom" stroke={axisColour} tickStroke={axisColour} fontFamily={fontFamily}/>
+					<YAxis axisAt="left" orient="left" ticks={5} stroke={axisColour} tickStroke={axisColour} tickFormat={format(".2s")} fontFamily={fontFamily}/>
 					<BarSeries yAccessor={d => d.volume} fill="rgba(164, 197, 238, 0.37)" />
 				</Chart>
                 }
@@ -78,17 +82,23 @@ class CandleStickChart extends React.Component {
 				<Chart id={1}
 						yExtents={[d => [d.high, d.low]]}
 						padding={{ top: 10, bottom: 20 }}>
-					<XAxis axisAt="bottom" orient="bottom" stroke={axisColour} tickStroke={axisColour} fontFamily="monospace" />
+
+					<XAxis axisAt="bottom" orient="bottom" stroke={axisColour} tickStroke={axisColour} fontFamily={fontFamily}/>
+
 					<MouseCoordinateX
 						at="bottom"
 						orient="bottom"
+                        fontFamily={fontFamily}
 						displayFormat={timeFormat("%Y-%m-%d")} />
+
 					<MouseCoordinateY
 						at="right"
 						orient="right"
+                        dx={10}
+                        fontFamily={fontFamily}
 						displayFormat={format(".2f")} />
 
-					<YAxis axisAt="right" orient="right" ticks={5} stroke={axisColour} tickStroke={axisColour} fontFamily="monospace" />
+					<YAxis axisAt="right" orient="right" ticks={5} stroke={axisColour} tickStroke={axisColour} fontFamily={fontFamily}/>
 
 					<CandlestickSeries
                         fill = {d => d.close > d.open ? "#6B8" : "#d26"}
@@ -98,7 +108,7 @@ class CandleStickChart extends React.Component {
 					<OHLCTooltip origin={[-40, 0]}/>
 
 				</Chart>
-				<CrossHairCursor strokeDasharray="LongDashDot" />
+				<CrossHairCursor strokeDasharray="LongDashDot" stroke={axisColour} snapX={false} />
 
 			</ChartCanvasEx>
 		);

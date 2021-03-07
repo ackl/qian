@@ -1,3 +1,4 @@
+import { useCallback, useState } from 'react'
 import React from 'react'
 import useSWR from 'swr'
 import Price from './price'
@@ -8,39 +9,39 @@ import KeyStats from './keystats'
 import ChartComponent from '../chart/chartwrapper'
 import Grid from '@material-ui/core/Grid';
 import Link from 'next/link'
+import StockChart from './stockChart'
 
 const fetcher = url => fetch(url).then(r => r.json())
 
+const buildUrl = (ticker, timeframe) => {
+    return `${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${ticker}/history/${timeframe}`
+}
+
 export default function StonkContainer(props) {
+
+    const [url, setUrl] = useState(buildUrl(props.symbol, 365));
+
     const {
         data: fundemental,
         error: error_f
     } = useSWR(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${props.symbol}`, fetcher)
 
     const {
-        data: OHLC,
-        error: error_ohlc
-    } = useSWR(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${props.symbol}/history`, url => fetch(url)
-        .then(r => r.json())
-        .then(data => {
-            return data.map(x => {
-                x.date = new Date(x.date)
-                return x
-            })
-        })
-    )
-
-    const {
         data: quote,
         error: error_quote
-    } = useSWR(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${props.symbol}/quote`, fetcher, { refreshInterval: 3000 })
+    } = useSWR(`${process.env.NEXT_PUBLIC_YAHOOFINANCEAPI}/stock/${props.symbol}/quote`, fetcher, )
+
+    const handleChangeTimeframe = useCallback((timeframe) => {
+            setUrl(buildUrl(props.symbol, timeframe))
+        }, [url],
+    );
 
 
-    if (error_f || error_ohlc || error_quote) {
+    if (error_f || error_quote) {
         return <h1>Something went wrong...</h1>
     }
 
-    if (!fundemental || !OHLC || !quote) {
+    if (!fundemental || !quote) {
         return <Spinner fullpage={true} />
     }
 
@@ -69,9 +70,8 @@ export default function StonkContainer(props) {
                 <EarningsChart earnings={fundemental.earnings} />
             </Grid>
             }
-            <Grid item xs={12} md={9}>
-                <ChartComponent data={OHLC} volume={true} />
-            </Grid>
+
+            <StockChart ticker={props.symbol} volume={true} />
 
             <Grid item xs={12} md={3}>
                 <KeyStats stats={fundemental.defaultKeyStatistics} summaryDetail={fundemental.summaryDetail} />
