@@ -6,8 +6,9 @@ import Grid from '@material-ui/core/Grid';
 import MarketCountdown from '../components/dashboard/marketCountdown'
 import DashboardChart from '../components/dashboard/dashboardChart'
 import Search from '../components/dashboard/search'
+import { getCountdownData } from '../components/utils'
 
-export default function Main() {
+export default function Main(props) {
     return (
         <>
             <Head>
@@ -20,7 +21,7 @@ export default function Main() {
                         <Grid container spacing={3} justify="center">
                             <Search />
 
-                            <MarketCountdown />
+                            <MarketCountdown countdown={props.MarketCountdownData} />
 
                             <DashboardChart ticker="BTC" volume={false} title="BTC" />
 
@@ -41,4 +42,16 @@ export default function Main() {
             </Box>
         </>
     )
+}
+
+export async function getServerSideProps(context) {
+    return {
+        props: {
+            MarketCountdownData: {
+                NYSE: getCountdownData('America/New_York', ['T09:30'], ['T16:00']),
+                LSE: getCountdownData('Europe/London', ['T08:00', 'T12:02'], ['T12:00', 'T16:30']),
+                HKEX: getCountdownData('Asia/Hong_Kong', ['T09:30', 'T13:00'], ['T12:00', 'T16:00'])
+            }
+        }
+    }
 }

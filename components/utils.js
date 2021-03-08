@@ -125,7 +125,7 @@ export function getCountdownData(market_tz, open, close) {
     }
 
     return {
-        date: countdownToDate,
+        date: countdownToDate.format(),
         countdownToEvent
     }
 }
