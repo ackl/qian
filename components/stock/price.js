@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import numeral from 'numeral';
 
 export default function Price(props)  {
     let currency = props.price.currencySymbol
@@ -31,14 +32,13 @@ export default function Price(props)  {
                 `}</style>
                 <p>{ props.price.quoteSourceName }</p>
                 <h2>
-                    { currency }{ props.price.regularMarketPrice } {' '}
+                    { currency }{ numeral(props.price.regularMarketPrice).format('0,0.00') } {' '}
                 </h2>
 
         {props.price.regularMarketChange &&
                 <span className={props.price.regularMarketChange > 0 ? styles.up : styles.down}>
-                { props.price.regularMarketChange.toFixed(3) } {' '}
-
-                ({ props.price.regularMarketChangePercent.toFixed(3) }%)
+                { numeral(props.price.regularMarketChange).format('0,0.00') } {' '}
+                ({ numeral(props.price.regularMarketChangePercent).format('0.000%') })
                 </span>
         }
 
