@@ -20,11 +20,11 @@ const MarketCountdownData = {
 
 export default class MarketCountdown extends React.Component {
     render () {
-
         const MarketCountdownCards = Object.keys(MarketCountdownData).map((k, i) => {
             return (
                 <Grid item xs={12} md={2} key={i}>
                     <Card>
+                        {console.log(k, MarketCountdownData[k].countdownToEvent)}
                         <CardContent className={MarketCountdownData[k].countdownToEvent == 'open' ? styles.close : styles.open}>
                             <h1>{k}</h1>
                             <h1> <Countdown daysInHours date={new Date(MarketCountdownData[k].date.format())} /> </h1>
