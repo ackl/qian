@@ -31,3 +31,7 @@ yarn-error.log*
 
 # vim
 *swp
+
+.vercel
+.python-version
+venv
